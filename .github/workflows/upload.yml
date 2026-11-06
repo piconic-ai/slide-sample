@@ -1,0 +1,53 @@
+name: Upload slides
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'decks/**'
+      - '.github/workflows/upload.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      # Slide verifies the upload with this repository's GitHub OIDC token.
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      # Hand-written HTML is sent as it is.
+      - name: Upload the static deck
+        uses: piconic-ai/slide@7e70919399a8ac4c624ce9d6aca2e1b2dbd50dc3
+        with:
+          directory: decks/static
+          deck: sample-static
+
+      # The same paths as sample-static with different bytes.
+      - name: Upload the twin deck
+        uses: piconic-ai/slide@7e70919399a8ac4c624ce9d6aca2e1b2dbd50dc3
+        with:
+          directory: decks/twin
+          deck: sample-twin
+
+      # Markdown is built on the author side; Slide never builds anything.
+      - name: Build the Marp deck
+        run: |
+          out="$RUNNER_TEMP/marp"
+          mkdir -p "$out"
+          npx --yes @marp-team/marp-cli@4.5.1 decks/marp/slides.md --output "$out/index.html"
+          cp -R decks/marp/images "$out/images"
+      - name: Upload the Marp deck
+        uses: piconic-ai/slide@7e70919399a8ac4c624ce9d6aca2e1b2dbd50dc3
+        with:
+          directory: ${{ runner.temp }}/marp
+          deck: sample-marp
