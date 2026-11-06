@@ -32,6 +32,13 @@ jobs:
           directory: decks/static
           deck: sample-static
 
+      # The same paths as sample-static with different bytes.
+      - name: Upload the twin deck
+        uses: piconic-ai/slide@7e70919399a8ac4c624ce9d6aca2e1b2dbd50dc3
+        with:
+          directory: decks/twin
+          deck: sample-twin
+
       # Markdown is built on the author side; Slide never builds anything.
       - name: Build the Marp deck
         run: |
