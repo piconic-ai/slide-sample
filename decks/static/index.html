@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>URL を渡して読んでもらう</title>
+    <!-- Root-relative: each deployment is served from its own origin root. -->
+    <link rel="stylesheet" href="/assets/style.css" />
+    <!-- Relative module script that imports another module. -->
+    <script type="module" src="./assets/deck.js"></script>
+  </head>
+  <body>
+    <main id="deck">
+      <section>
+        <small>Slide sample</small>
+        <h1>URL を渡して読んでもらう</h1>
+        <p>静的な HTML のスライドを、そのまま共有 URL で配ります。</p>
+        <p class="hint">→ / Space / スワイプで次へ</p>
+      </section>
+      <section>
+        <h2>作者がすること</h2>
+        <ol>
+          <li>リポジトリにスライドを置く</li>
+          <li>GitHub Actions が Slide へ送る</li>
+          <li>管理画面で確かめて一般公開する</li>
+          <li>共有 URL をコピーして渡す</li>
+        </ol>
+      </section>
+      <section>
+        <h2>読者がすること</h2>
+        <img src="images/flow.svg" alt="共有 URL を開くと、資料がそのまま表示される流れの図" />
+        <p>アカウントもアプリも要りません。スマートフォンでも PC でも開けます。</p>
+      </section>
+      <section>
+        <h2>資料はそのまま動く</h2>
+        <p>相対パス・root 相対パスの CSS や画像、module script を、作者が書いたとおりに読み込みます。</p>
+        <p>このページの番号: <output id="page"></output></p>
+      </section>
+      <section>
+        <h2>おわり</h2>
+        <p>補足は <a href="/appendix/">付録</a> にあります。</p>
+      </section>
+    </main>
+  </body>
+</html>
