@@ -10,7 +10,9 @@ export function startNavigation({ next, previous }) {
     if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(event.key)) next()
     if (['ArrowLeft', 'PageUp', 'Backspace'].includes(event.key)) previous()
   })
-  addEventListener('click', (event) => {
+  // iOS Safari fires click only on elements it treats as clickable, which a
+  // window listener does not make them, so the deck element listens itself.
+  document.querySelector('#deck')?.addEventListener('click', (event) => {
     if (event.target.closest('a')) return
     if (event.clientX < innerWidth / 3) previous()
     else next()

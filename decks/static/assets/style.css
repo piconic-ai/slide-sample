@@ -65,3 +65,8 @@ img {
 a {
   color: var(--accent);
 }
+
+/* iOS Safari treats an element with a pointer cursor as clickable. */
+#deck {
+  cursor: pointer;
+}
