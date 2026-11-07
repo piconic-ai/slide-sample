@@ -89,3 +89,8 @@ td {
   white-space: pre-wrap;
   font-size: 0.8em;
 }
+
+/* iOS Safari treats an element with a pointer cursor as clickable. */
+#deck {
+  cursor: pointer;
+}
