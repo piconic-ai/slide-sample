@@ -78,3 +78,14 @@ td {
   text-align: left;
   vertical-align: top;
 }
+
+#touch-area {
+  border: 2px dashed currentColor;
+  padding: 2em 1em;
+  text-align: center;
+}
+
+#touch-log {
+  white-space: pre-wrap;
+  font-size: 0.8em;
+}
