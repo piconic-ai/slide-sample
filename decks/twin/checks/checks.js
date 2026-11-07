@@ -57,3 +57,31 @@ document.querySelector('#top').addEventListener('click', () => {
     show('viewer の外への移動', `止められた: ${error.message}`, '移動しない')
   }
 })
+
+// Counts the touch and pointer events this frame receives, so a phone that
+// will not page through the deck shows which part of the gesture is missing.
+const touchLog = document.querySelector('#touch-log')
+const counts = {}
+let last = ''
+function record(event) {
+  counts[event.type] = (counts[event.type] ?? 0) + 1
+  const point = event.changedTouches?.[0] ?? event
+  last = `${event.type} x=${Math.round(point.clientX ?? 0)} cancelable=${event.cancelable}`
+  touchLog.textContent = [
+    `viewer の中: ${window !== top}`,
+    `UA: ${navigator.userAgent}`,
+    ...Object.entries(counts).map(([type, count]) => `${type}: ${count}`),
+    `最後: ${last}`,
+  ].join('\n')
+}
+for (const type of [
+  'touchstart',
+  'touchmove',
+  'touchend',
+  'touchcancel',
+  'pointerdown',
+  'pointerup',
+  'pointercancel',
+  'click',
+])
+  addEventListener(type, record, { passive: true })
