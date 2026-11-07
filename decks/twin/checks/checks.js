@@ -58,30 +58,32 @@ document.querySelector('#top').addEventListener('click', () => {
   }
 })
 
-// Counts the touch and pointer events this frame receives, so a phone that
-// will not page through the deck shows which part of the gesture is missing.
+// Counts the touch and pointer events this frame receives at each level, so a
+// phone that will not page through the deck shows where the events stop.
 const touchLog = document.querySelector('#touch-log')
+const touchArea = document.querySelector('#touch-area')
 const counts = {}
 let last = ''
-function record(event) {
-  counts[event.type] = (counts[event.type] ?? 0) + 1
-  const point = event.changedTouches?.[0] ?? event
-  last = `${event.type} x=${Math.round(point.clientX ?? 0)} cancelable=${event.cancelable}`
-  touchLog.textContent = [
-    `viewer の中: ${window !== top}`,
-    `UA: ${navigator.userAgent}`,
-    ...Object.entries(counts).map(([type, count]) => `${type}: ${count}`),
-    `最後: ${last}`,
-  ].join('\n')
+function recorder(level) {
+  return (event) => {
+    const key = `${level} ${event.type}`
+    counts[key] = (counts[key] ?? 0) + 1
+    const point = event.changedTouches?.[0] ?? event
+    last = `${key} x=${Math.round(point.clientX ?? 0)} cancelable=${event.cancelable}`
+    touchLog.textContent = [
+      `viewer の中: ${window !== top}`,
+      `UA: ${navigator.userAgent}`,
+      ...Object.entries(counts).map(([type, count]) => `${type}: ${count}`),
+      `最後: ${last}`,
+    ].join('\n')
+  }
 }
-for (const type of [
-  'touchstart',
-  'touchmove',
-  'touchend',
-  'touchcancel',
-  'pointerdown',
-  'pointerup',
-  'pointercancel',
-  'click',
-])
-  addEventListener(type, record, { passive: true })
+const levels = [
+  ['window', window],
+  ['document', document],
+  ['body', document.body],
+  ['枠', touchArea],
+]
+for (const [level, target] of levels)
+  for (const type of ['touchstart', 'touchend', 'pointerdown', 'click'])
+    target.addEventListener(type, recorder(level), { passive: true })
