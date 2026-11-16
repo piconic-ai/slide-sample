@@ -39,7 +39,7 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
-      - uses: piconic-ai/slide@4e17921492824aea6895d491be5ca7c8709a52e4
+      - uses: piconic-ai/slide@7c2329df2bfe031cb2d694f687d8057dd8bd4b52
         with:
           directory: ${{ matrix.directory }}
           slide: ${{ matrix.slide }}
@@ -63,7 +63,7 @@ jobs:
           mkdir -p "$out"
           npx --yes @marp-team/marp-cli@4.5.1 decks/marp/slides.md --output "$out/index.html"
           cp -R decks/marp/images "$out/images"
-      - uses: piconic-ai/slide@4e17921492824aea6895d491be5ca7c8709a52e4
+      - uses: piconic-ai/slide@7c2329df2bfe031cb2d694f687d8057dd8bd4b52
         with:
           directory: ${{ runner.temp }}/marp
           slide: sample-marp
