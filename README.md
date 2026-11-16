@@ -4,10 +4,10 @@ Sample decks for [Slide](https://github.com/piconic-ai/slide). A push to
 `main` uploads them with the Slide GitHub Action as private drafts; the owner
 checks a draft and publishes it from the Slide management screen.
 
-| Deck ID | Source | What it shows |
+| Slide ID | Source | What it shows |
 | --- | --- | --- |
 | `sample-static` | `decks/static/` | Hand-written HTML with relative and root-relative CSS and images, module scripts, a directory index (`/appendix/`), and keyboard, click and swipe navigation |
-| `sample-twin` | `decks/twin/` | The same paths as `sample-static` (`/index.html`, `/assets/style.css`, `/images/flow.svg`) with different contents, and an on-screen isolation check at `/checks/` |
+| `sample-twin` | `decks/twin/` | The same paths as `sample-static` (`/index.html`, `/assets/style.css`, `/images/flow.svg`) with different contents, an on-screen isolation check at `/checks/`, and a page that talks to other hosts at `/external/` |
 | `sample-marp` | `decks/marp/slides.md` | Markdown built to HTML with Marp in CI, with an image next to it |
 
 ## Set up
@@ -18,7 +18,7 @@ checks a draft and publishes it from the Slide management screen.
 2. Push to `main`, or run the `Upload slides` workflow from the Actions tab.
 3. Open each deck in the management screen, check the draft with the
    owner-only preview, and publish it. The share URL is
-   `https://slide.piconic.ai/@<handle>/<deck ID>`.
+   `https://slide.community/@<handle>/<slide ID>`.
 
 ## Checks these decks support
 
@@ -42,6 +42,11 @@ These follow the acceptance criteria of
 - **Author JS stays isolated.** Open `/checks/` from the `sample-twin` viewer
   on each device. The table shows each result next to what is expected; the
   buttons must not open a tab, leave the viewer, or submit the form.
+- **Hosts the slides talk to are shown.** Open `/external/` from the
+  `sample-twin` viewer. The page loads an image, a font, a script and an API
+  from other hosts. Then open "このスライドの通信先" on the share page: it
+  lists `api.github.com`, `avatars.githubusercontent.com`,
+  `cdn.jsdelivr.net`, `fonts.googleapis.com` and `fonts.gstatic.com`.
 
 ## Look at a deck locally
 

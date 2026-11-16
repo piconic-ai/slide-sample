@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>外部と通信するページ</title>
+    <link rel="stylesheet" href="../assets/style.css" />
+    <!-- Each of these reaches a host other than this slide's own. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script type="module" src="./external.js"></script>
+  </head>
+  <body>
+    <section>
+      <h2 style="font-family: 'Zen Maru Gothic', sans-serif">外部と通信するページ</h2>
+      <p>このページは、スライドの外の host から画像・フォント・script を読み、API を呼びます。Slide はこの通信を止めず、読者のブラウザからの報告をもとに、共有 URL のページの「このスライドの通信先」に host を出します。</p>
+      <p><img id="image" src="https://avatars.githubusercontent.com/u/9919?s=64" width="64" height="64" alt="GitHub の画像" /></p>
+      <table>
+        <thead>
+          <tr><th>読み込むもの</th><th>host</th><th>結果</th></tr>
+        </thead>
+        <tbody id="results"></tbody>
+      </table>
+      <p><small>共有 URL のページで「このスライドの通信先」を開き、上の host が並べば期待どおりです。</small></p>
+      <p><a href="/checks/">確認用のページ</a> · <a href="/">スライドに戻る</a></p>
+    </section>
+  </body>
+</html>
