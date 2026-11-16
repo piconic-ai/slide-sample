@@ -36,7 +36,7 @@ if (navigator.serviceWorker) {
   show('service worker の登録', 'この環境では使えない', '拒否される')
 }
 
-fetch('https://slide.piconic.ai/api/decks', { credentials: 'include' }).then(
+fetch('https://slide.community/api/slides', { credentials: 'include' }).then(
   (response) => show('管理 API の読み取り', `読めた (${response.status})`, '読めない'),
   () => show('管理 API の読み取り', '読めない', '読めない'),
 )

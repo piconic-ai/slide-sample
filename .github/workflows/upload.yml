@@ -15,7 +15,7 @@ jobs:
   # Each deck uploads in its own job, so a deck that is not connected to this
   # repository yet fails on its own without stopping the others.
   html:
-    name: Upload ${{ matrix.deck }}
+    name: Upload ${{ matrix.slide }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -27,22 +27,22 @@ jobs:
       matrix:
         include:
           # Hand-written HTML, sent as it is.
-          - deck: sample-static
+          - slide: sample-static
             directory: decks/static
           # The same paths as sample-static with different bytes.
-          - deck: sample-twin
+          - slide: sample-twin
             directory: decks/twin
-          - deck: sample-static2
+          - slide: sample-static2
             directory: decks/static2
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
-      - uses: piconic-ai/slide@7e70919399a8ac4c624ce9d6aca2e1b2dbd50dc3
+      - uses: piconic-ai/slide@4e17921492824aea6895d491be5ca7c8709a52e4
         with:
           directory: ${{ matrix.directory }}
-          deck: ${{ matrix.deck }}
+          slide: ${{ matrix.slide }}
 
   marp:
     name: Upload sample-marp
@@ -63,7 +63,7 @@ jobs:
           mkdir -p "$out"
           npx --yes @marp-team/marp-cli@4.5.1 decks/marp/slides.md --output "$out/index.html"
           cp -R decks/marp/images "$out/images"
-      - uses: piconic-ai/slide@7e70919399a8ac4c624ce9d6aca2e1b2dbd50dc3
+      - uses: piconic-ai/slide@4e17921492824aea6895d491be5ca7c8709a52e4
         with:
           directory: ${{ runner.temp }}/marp
-          deck: sample-marp
+          slide: sample-marp
