@@ -1,0 +1,72 @@
+:root {
+  --ink: #f0f5ff;
+  --muted: #bfcfe9;
+  --accent: #85cfc3;
+  --ground: #101b2d;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: system-ui, sans-serif;
+}
+
+main {
+  height: 100%;
+}
+
+section {
+  box-sizing: border-box;
+  height: 100%;
+  max-width: 1050px;
+  margin: auto;
+  padding: 8vh 7vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section[hidden] {
+  display: none;
+}
+
+h1 {
+  font-size: clamp(32px, 6vw, 80px);
+  line-height: 1.2;
+  margin: 0.2em 0;
+}
+
+h2 {
+  font-size: clamp(26px, 4.5vw, 56px);
+  margin: 0 0 0.6em;
+}
+
+p,
+li {
+  font-size: clamp(18px, 2.8vw, 34px);
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+small,
+.hint {
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+img {
+  max-width: 100%;
+  max-height: 45vh;
+}
+
+a {
+  color: var(--accent);
+}
+
+/* iOS Safari treats an element with a pointer cursor as clickable. */
+#deck {
+  cursor: pointer;
+}

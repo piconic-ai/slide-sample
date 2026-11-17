@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" font-family="system-ui, sans-serif" font-size="22">
+  <rect x="10" y="50" width="170" height="100" rx="12" fill="#1d2d47" stroke="#85cfc3" stroke-width="3"/>
+  <text x="95" y="108" fill="#f0f5ff" text-anchor="middle">共有 URL</text>
+  <path d="M190 100 H 290" stroke="#85cfc3" stroke-width="4" marker-end="url(#arrow)"/>
+  <rect x="300" y="50" width="170" height="100" rx="12" fill="#1d2d47" stroke="#85cfc3" stroke-width="3"/>
+  <text x="385" y="108" fill="#f0f5ff" text-anchor="middle">viewer</text>
+  <path d="M480 100 H 560" stroke="#85cfc3" stroke-width="4" marker-end="url(#arrow)"/>
+  <text x="600" y="108" fill="#f0f5ff" text-anchor="middle">資料</text>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#85cfc3"/>
+    </marker>
+  </defs>
+</svg>
